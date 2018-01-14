@@ -10,8 +10,9 @@ public class HTTPApplication implements Runnable {
     this.socket = socket;
   }
   public void run(){
+    BufferedReader bf = null;
     try{
-      BufferedReader bf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+      bf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       String line0 = bf.readLine();
       if (line0 != null) {
         // 1. Build HTTPRequest
@@ -21,10 +22,15 @@ public class HTTPApplication implements Runnable {
         HTTPResponse res = new HTTPHandler().response(request, socket);
         System.out.println("\nResponse:\n" + res);
       }
-      bf.close();
-      socket.close();
     }catch(Exception ex){
       ex.printStackTrace();
+    }finally{
+      try {
+        if (bf != null) bf.close();
+        if(socket != null) socket.close();
+      }catch(Exception ex){
+        ex.printStackTrace();
+      }
     }
 
   }

@@ -29,10 +29,7 @@ public class HTTPRouter {
   }
 
   public Function<HTTPRequest, HTTPResponse> getFunc(String path){
-    Function<HTTPRequest, HTTPResponse> func = null;
-    if(!router.containsKey(path)) func = router.get("404");
-    else func = router.get(path);
-    return func;
+    return router.getOrDefault(path, router.get("404"));
   }
 
   private Function<HTTPRequest, HTTPResponse> funcResponse404 = request -> new HTTPResponse(404);

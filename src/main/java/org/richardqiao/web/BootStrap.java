@@ -15,8 +15,12 @@ public class BootStrap {
    * @param args args[0]: portNumber, args[1]: threadCount
    * @throws Exception
    */
-  public static void main(String[] args) throws Exception {
-    HTTPServer server = HTTPServer.getInstance(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
-    server.start();
+  public static void main(String[] args) {
+    try {
+      HTTPServer server = HTTPServer.getInstance(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+      server.start();
+    }catch(Exception ex){
+      ex.printStackTrace();
+    }
   }
 }

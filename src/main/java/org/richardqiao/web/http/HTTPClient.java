@@ -22,8 +22,6 @@ public class HTTPClient {
           Socket socket = new Socket(address, port);
           DataOutputStream output = new DataOutputStream(socket.getOutputStream());
           output.writeBytes(header + body);
-//          output.close();
-//          socket.close();
         }
         public void run(){
           try {
