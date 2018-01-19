@@ -6,12 +6,14 @@ import java.net.Socket;
 
 public class HTTPApplication implements Runnable {
   private Socket socket;
-  public HTTPApplication(Socket socket){
+
+  public HTTPApplication(Socket socket) {
     this.socket = socket;
   }
-  public void run(){
+
+  public void run() {
     BufferedReader bf = null;
-    try{
+    try {
       bf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       String line0 = bf.readLine();
       if (line0 != null) {
@@ -22,13 +24,13 @@ public class HTTPApplication implements Runnable {
         HTTPResponse res = new HTTPHandler().response(request, socket);
         System.out.println("\nResponse:\n" + res);
       }
-    }catch(Exception ex){
+    } catch (Exception ex) {
       ex.printStackTrace();
-    }finally{
+    } finally {
       try {
         if (bf != null) bf.close();
-        if(socket != null) socket.close();
-      }catch(Exception ex){
+        if (socket != null) socket.close();
+      } catch (Exception ex) {
         ex.printStackTrace();
       }
     }

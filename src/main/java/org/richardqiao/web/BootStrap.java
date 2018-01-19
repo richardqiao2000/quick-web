@@ -2,8 +2,8 @@ package org.richardqiao.web;
 
 /**
  * TODO: Exception responses
- *        Logging
- *        NGinx Load Balancer
+ * Logging
+ * NGinx Load Balancer
  */
 
 import org.richardqiao.web.http.HTTPServer;
@@ -19,7 +19,7 @@ public class BootStrap {
     try {
       HTTPServer server = HTTPServer.getInstance(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
       server.start();
-    }catch(Exception ex){
+    } catch (Exception ex) {
       ex.printStackTrace();
     }
   }

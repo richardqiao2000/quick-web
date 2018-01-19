@@ -33,18 +33,16 @@ public class HTTPServer {
    */
   public void start() throws Exception{
     final ServerSocket serverSocket = new ServerSocket(port);
-    Runtime.getRuntime().addShutdownHook(new Thread(){
-      public void run(){
-        try{
-          exec.shutdown();
-          System.out.println("ExecutorServices shutdown.");
-          serverSocket.close();
-          System.out.println("ServerSocked closed.");
-        }catch(Exception e){
-          e.printStackTrace();
-        }
+    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+      try{
+        exec.shutdown();
+        System.out.println("ExecutorServices shutdown.");
+        serverSocket.close();
+        System.out.println("ServerSocked closed.");
+      }catch(Exception e){
+        e.printStackTrace();
       }
-    });
+    }));
     while (true) {
       Socket socket  = serverSocket.accept();
       exec.execute(new HTTPApplication(socket));

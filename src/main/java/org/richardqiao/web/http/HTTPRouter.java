@@ -9,7 +9,8 @@ public class HTTPRouter {
   private Map<String, Function<HTTPRequest, HTTPResponse>> router;
 
   private static HTTPRouter instance;
-  private HTTPRouter(){
+
+  private HTTPRouter() {
     router = new HashMap<>();
     router.put("404", funcResponse404);
     router.put("hi", funcResponseHi);
@@ -17,10 +18,10 @@ public class HTTPRouter {
     router.put("comcast", funcResponseComcast);
   }
 
-  public static HTTPRouter getInstance(){
-    if(instance == null){
-      synchronized(HTTPRouter.class){
-        if(instance == null){
+  public static HTTPRouter getInstance() {
+    if (instance == null) {
+      synchronized (HTTPRouter.class) {
+        if (instance == null) {
           instance = new HTTPRouter();
         }
       }
@@ -28,7 +29,7 @@ public class HTTPRouter {
     return instance;
   }
 
-  public Function<HTTPRequest, HTTPResponse> getFunc(String path){
+  public Function<HTTPRequest, HTTPResponse> getFunc(String path) {
     return router.getOrDefault(path, router.get("404"));
   }
 
